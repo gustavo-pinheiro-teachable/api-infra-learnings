@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: api-infra-learnings-deployment
+  labels:
+    app: api-infra-learnings
+
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: api-infra-learnings
+  template:
+    metadata:
+      labels:
+        app: api-infra-learnings
+    spec:
+      containers:
+        - name: api-infra-learnings
+          image: gustablo/api-infra-learnings #is missing the latest tag here, but need to push latest on github workflow
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
